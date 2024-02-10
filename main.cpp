@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <array>
 
 //using namespace std;
 
@@ -20,10 +21,24 @@ void read_csv(std::string filename){
     
     std::vector<std::string> row;
     std::string line, word, temp;
+    //std::array<std::string,
 
-    while (std::getline(file, line,',')) {
+    while (std::getline(file, line)) {
+
+        std::stringstream ss(line);
+        while (std::getline(ss, word,',')) {
+            row.push_back(word);
+        }
     }
-}
+
+    for (const auto& value : row) {
+        std::cout << value << " ";
+    }
+    std::cout << std::endl;
+
+    file.close();
+
+}   
 
 int main(int, char**){
 
