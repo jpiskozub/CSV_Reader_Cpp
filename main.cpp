@@ -7,7 +7,7 @@
 
 //using namespace std;
 
-const int MAX_COLS = 15;
+const int MAX_COLS = 18;
 const int MAX_ROWS = 500000;
 
 
@@ -35,7 +35,7 @@ void read_csv(std::string filename){
          std::string token;
         int col = 0;
 
-        while (std::getline(ss, token, ',') && col < MAX_COLS) {
+        while (std::getline(ss, token, ';') && col < MAX_COLS) {
             rowData[col++] = token;
         }
 
@@ -50,7 +50,6 @@ void read_csv(std::string filename){
         std::cout << std::endl;
     }
     file.close();
-    
 }   
 
 int main(int, char**){
