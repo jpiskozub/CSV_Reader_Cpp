@@ -7,6 +7,9 @@
 
 //using namespace std;
 
+const int MAX_COLS = 15;
+const int MAX_ROWS = 10000000;
+
 
 void read_csv(std::string filename){
 
@@ -16,28 +19,38 @@ void read_csv(std::string filename){
         std::cerr << "Nie udało się otworzyć pliku CSV." << std::endl;
     }
     else{
-        std::cerr << "Plik CSV otwarty - odczytuje" << std::endl;
+        std::cout << "Plik CSV otwarty - odczytuje" << std::endl;
     }
     
-    std::vector<std::string> row;
-    std::string line, word, temp;
+    std::vector<std::array<std::string, MAX_COLS>> matrix(MAX_ROWS);
+    std::string line, word;
     //std::array<std::string,
+    int row = 0;
 
     while (std::getline(file, line)) {
 
         std::stringstream ss(line);
-        while (std::getline(ss, word,',')) {
-            row.push_back(word);
+        std::array<std::string, MAX_COLS> rowData;
+
+         std::string token;
+        int col = 0;
+
+        while (std::getline(ss, token, ',') && col < MAX_COLS) {
+            rowData[col++] = token;
         }
-    }
 
-    for (const auto& value : row) {
-        std::cout << value << " ";
+        matrix[row++] = rowData;
     }
-    std::cout << std::endl;
+    
+    for (const auto& row : matrix) {
 
+        for (const auto& value : row) {
+            std::cout << value << " ";
+        }
+        std::cout << std::endl;
+    }
     file.close();
-
+    
 }   
 
 int main(int, char**){
